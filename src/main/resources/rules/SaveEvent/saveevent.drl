@@ -1,0 +1,13 @@
+package rules.SaveEvent
+
+import com.integration.document.SurveyEvent;
+import com.integration.service.DroolsService;
+
+global DroolsService srDrools;
+
+rule "SaveEventeCaseClosed"
+	when
+		event : SurveyEvent(getCaseForSurvey().getStatus() == "Closed")
+	then
+		srDrools.saveSurveyEvent(event);
+end
